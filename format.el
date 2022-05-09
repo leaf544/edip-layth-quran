@@ -1,0 +1,13 @@
+(defvar i 1)
+
+(defun format-next ()
+  (interactive)
+  (while (< i 115)
+    (find-file (concat "~/quran/" (number-to-string i) ".txt"))
+    (dotimes (i (- (line-number-at-pos (point-max)) 10))
+      (command-execute 'end-of-line)
+      (command-execute 'set-mark-command)
+      (command-execute 'beginning-of-line)
+      (command-execute 'quran-formatter))
+    (save-buffer)
+    (setf i (+ i 1))))
